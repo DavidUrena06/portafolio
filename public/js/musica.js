@@ -5,7 +5,7 @@
 //  level() da la energía del sonido para que las partículas respiren.
 // ============================================================
 
-const SRC = 'assets/cancion.mp3';
+const SRC = 'assets/cancion.mp3?v=1';
 const mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
 const CHORDS = [[57, 60, 64, 71], [53, 57, 60, 67], [48, 55, 64, 67], [55, 59, 62, 69]];
 
