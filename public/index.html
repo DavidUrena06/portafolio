@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07070b">
+<meta name="robots" content="noindex">
+<title>Lorem Ipsum — Universo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" } }</script>
+</head>
+<body>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="glow" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"><i></i></div>
+<label id="haptic" aria-hidden="true"><input type="checkbox" switch></label>
+
+<!-- ============ ENTRADA ============ -->
+<div id="gate">
+  <p class="mono gate-k">Lorem ipsum · Portafolio 2026</p>
+  <button id="enter" class="enter" data-hover>
+    <span class="enter-ring"></span><span class="enter-ring r2"></span>
+    <span class="enter-txt">Entrar</span>
+  </button>
+  <p class="mono gate-h">Con sonido · <span class="t-touch">toca todo</span><span class="t-desk">mueve el mouse</span></p>
+</div>
+
+<!-- ============ BARRA ============ -->
+<header id="top">
+  <span class="brand">L<em>i</em></span>
+  <nav class="dots" id="dots" aria-label="Secciones"></nav>
+  <button id="snd" class="snd" aria-label="Sonido" data-hover><i></i><i></i><i></i><i></i></button>
+</header>
+
+<div id="toast" class="mono" aria-live="polite"></div>
+
+<main id="main">
+
+  <!-- 01 · INICIO: el nombre hecho de partículas -->
+  <section class="sec s-hero" data-shape="text" data-name="Inicio"
+           data-hint-touch="Toca · arrastra · mantén presionado" data-hint-desk="Mueve el mouse · mantén el clic">
+    <p class="mono kicker">Lorem ipsum — dolor sit amet</p>
+    <h1 class="sr">Lorem Ipsum</h1>
+    <div class="hero-foot">
+      <p class="hero-tag">Lorem ipsum dolor sit <em>amet, consectetur</em> adipiscing elit.</p>
+      <div class="scroll-cue mono"><span>Baja</span><i></i></div>
+    </div>
+  </section>
+
+  <!-- 02 · SOBRE MÍ: la foto hecha de partículas -->
+  <section class="sec s-about" data-shape="portrait" data-name="Sobre mí"
+           data-hint-touch="Agita el teléfono" data-hint-desk="Doble clic para explotar">
+    <div class="about-txt">
+      <p class="mono kicker">02 — Sobre mí</p>
+      <h2 class="big">Lorem ipsum <em>dolor</em> sit amet.</h2>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="stats">
+        <div><b data-to="12">0</b><span class="mono">Lorem ipsum</span></div>
+        <div><b data-to="48">0</b><span class="mono">Dolor sit</span></div>
+        <div><b data-to="7">0</b><span class="mono">Amet elit</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · PROYECTOS: tarjetas holográficas -->
+  <section class="sec s-work" data-shape="galaxy" data-name="Proyectos"
+           data-hint-touch="Desliza e inclina las tarjetas" data-hint-desk="Pasa el mouse · arrastra">
+    <div class="sec-head">
+      <p class="mono kicker">03 — Proyectos</p>
+      <h2 class="big">Lorem <em>ipsum.</em></h2>
+    </div>
+    <div class="cards" id="cards">
+      <article class="card" data-hover><div class="card-in"><div class="art a1"></div><div class="holo"></div><div class="glare"></div>
+        <div class="card-txt"><span class="mono">01 · Lorem</span><h3>Lorem ipsum</h3><p>Dolor sit amet, consectetur adipiscing.</p></div></div></article>
+      <article class="card" data-hover><div class="card-in"><div class="art a2"></div><div class="holo"></div><div class="glare"></div>
+        <div class="card-txt"><span class="mono">02 · Ipsum</span><h3>Dolor sit</h3><p>Sed do eiusmod tempor incididunt ut.</p></div></div></article>
+      <article class="card" data-hover><div class="card-in"><div class="art a3"></div><div class="holo"></div><div class="glare"></div>
+        <div class="card-txt"><span class="mono">03 · Dolor</span><h3>Amet elit</h3><p>Ut enim ad minim veniam, quis nostrud.</p></div></div></article>
+      <article class="card" data-hover><div class="card-in"><div class="art a4"></div><div class="holo"></div><div class="glare"></div>
+        <div class="card-txt"><span class="mono">04 · Sit</span><h3>Consectetur</h3><p>Duis aute irure dolor in reprehenderit.</p></div></div></article>
+      <article class="card" data-hover><div class="card-in"><div class="art a5"></div><div class="holo"></div><div class="glare"></div>
+        <div class="card-txt"><span class="mono">05 · Amet</span><h3>Adipiscing</h3><p>Excepteur sint occaecat cupidatat.</p></div></div></article>
+    </div>
+  </section>
+
+  <!-- 04 · HABILIDADES: esferas con física -->
+  <section class="sec s-skills" data-shape="planet" data-name="Habilidades"
+           data-hint-touch="Inclina el teléfono · lanza las esferas" data-hint-desk="Agarra y lanza las esferas">
+    <div class="sec-head">
+      <p class="mono kicker">04 — Habilidades</p>
+      <h2 class="big">Dolor <em>sit amet.</em></h2>
+    </div>
+    <canvas class="phys" id="phys"></canvas>
+  </section>
+
+  <!-- 05 · PROCESO: lluvia de código con mensaje -->
+  <section class="sec s-matrix" data-shape="rain" data-name="Proceso"
+           data-hint-touch="Frota la pantalla" data-hint-desk="Pasa el mouse por la lluvia">
+    <div class="sec-head">
+      <p class="mono kicker">05 — Proceso</p>
+      <h2 class="big">Consectetur <em>elit.</em></h2>
+    </div>
+    <canvas class="rain" id="rain"></canvas>
+    <ol class="steps">
+      <li><span class="mono">01</span>Lorem ipsum</li>
+      <li><span class="mono">02</span>Dolor sit</li>
+      <li><span class="mono">03</span>Amet elit</li>
+    </ol>
+  </section>
+
+  <!-- 06 · CONTACTO: el agujero negro -->
+  <section class="sec s-contact" data-shape="hole" data-name="Contacto"
+           data-hint-touch="Mantén presionado el centro" data-hint-desk="Mantén presionado el centro">
+    <div class="sec-head center">
+      <p class="mono kicker">06 — Contacto</p>
+      <h2 class="big">¿Lorem <em>ipsum?</em></h2>
+    </div>
+    <div class="hole-wrap">
+      <button class="hold" id="hold" data-hover>
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><circle class="prog" cx="50" cy="50" r="47"/></svg>
+        <span class="hold-txt mono">Mantén<br>presionado</span>
+      </button>
+    </div>
+    <div class="links" id="links">
+      <a href="#" class="pill solid" data-hover onclick="return false">Lorem <span>↗</span></a>
+      <a href="#" class="pill" data-hover onclick="return false">Ipsum <span>↗</span></a>
+      <a href="#" class="pill" data-hover onclick="return false">Dolor <span>↗</span></a>
+    </div>
+    <footer class="firma">
+      <a href="https://norastudio.digital" target="_blank" rel="noopener" class="firma-a">
+        <img src="assets/norastudio-bone.webp" alt="NORASTUDIO" width="80" height="16">
+        <span>Diseñado y desarrollado por <b>NORASTUDIO</b></span>
+      </a>
+      <a href="tel:+50687578890" class="firma-a">Proyectos <b>8757 8890</b></a>
+    </footer>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
