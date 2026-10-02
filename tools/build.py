@@ -13,14 +13,13 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUB = os.path.join(RAIZ, "public")
 
 SITE = "https://david.norastudio.digital"   # dirección final del portafolio
-MOSTRAR_PRECIOS = True                         # False oculta todos los precios de NoraStudio
 WA_NUM = "50687578890"                         # WhatsApp de NoraStudio
 EMAIL = "josue.calderon.urena@gmail.com"
 LINKEDIN = "https://www.linkedin.com/in/davure"
 GITHUB = "https://github.com/DavidUrena06"
 INSTAGRAM = "https://www.instagram.com/urenas.js"
 NORA = "https://norastudio.digital"
-VERSION = "3"                                  # súbelo para romper caché de css/js
+VERSION = "4"                                  # súbelo para romper caché de css/js
 
 def wa(msg):
     return f"https://wa.me/{WA_NUM}?text={quote(msg)}"
@@ -49,7 +48,7 @@ ES = {
     "hints": {
         "hero": ("Toca · arrastra · mantén presionado", "Mueve el mouse · mantén el clic"),
         "about": ("Agita el teléfono", "Doble clic para explotar"),
-        "nora": ("Toca un paquete para cotizar", "Clic en un paquete para cotizar"),
+        "nora": ("Toca · arrastra · mantén presionado", "Mueve el mouse · mantén el clic"),
         "ngn": ("Desliza e inclina las tarjetas", "Pasa el mouse · arrastra"),
         "work": ("Desliza e inclina las tarjetas", "Pasa el mouse · arrastra"),
         "skills": ("Lanza las esferas · toca una para ver detalles", "Agarra y lanza · clic para ver detalles"),
@@ -76,28 +75,7 @@ ES = {
     "nora_lead": "Estudio de desarrollo web y software para negocios en Costa Rica. Cada proyecto se diseña a la medida, con <b>SEO</b> y <b>panel de administración</b> cuando aplica.",
     "promise_k": "Mi promesa",
     "promise": "Tu sitio <b>no se publica</b> hasta que estés <b>totalmente satisfecho.</b> Calidad ante todo.",
-    "from": "desde", "min": "mínimo", "typ": "típico", "month": "/mes",
-    "packs": [
-        ("NORA Base", "Landing page", "₡100.000", "from", ""),
-        ("NORA Presencia", "Sitio corporativo", "₡350.000", "from", ""),
-        ("NORA Tienda", "Tienda en línea (e-commerce)", "₡500.000", "min", "típico ₡700.000"),
-        ("NORA a Medida", "Software y apps web a medida", "₡600.000", "from", ""),
-    ],
-    "pack_msg": "Hola David, vi tu portafolio y me interesa {p}. ¿Me das más información?",
-    "extras_k": "Además",
-    "extras": [
-        ("Mantenimiento", "₡25.000/mes", "Dominio y hosting aparte"),
-        ("Gestión de Meta Ads", "₡45.000 – 70.000/mes", "Más la inversión publicitaria del cliente"),
-    ],
-    "social_k": "Contenido y redes · mensual",
-    "social": [
-        ("Esencial", "₡95.000", "8 posts · 2 videos"),
-        ("Crecimiento", "₡165.000", "10 posts · 3 videos"),
-        ("Estudio Completo", "₡260.000", "12 posts · 4 videos · gestión de Meta Ads"),
-    ],
-    "case_k": "En desarrollo",
-    "case": "Tienda en línea para un negocio local de alimento para perros: SEO, panel de administración y tienda completa.",
-    "nora_cta": "Cotizar por WhatsApp",
+    "nora_cta": "Escribir por WhatsApp",
     "nora_msg": "Hola David, vi tu portafolio y quiero cotizar un proyecto con NoraStudio.",
     "nora_site": "Visitar norastudio.digital",
 
@@ -177,7 +155,7 @@ EN = {
     "hints": {
         "hero": ("Tap · drag · press and hold", "Move your mouse · hold the click"),
         "about": ("Shake your phone", "Double-click to explode"),
-        "nora": ("Tap a package to get a quote", "Click a package to get a quote"),
+        "nora": ("Tap · drag · press and hold", "Move your mouse · hold the click"),
         "ngn": ("Swipe and tilt the cards", "Hover · drag"),
         "work": ("Swipe and tilt the cards", "Hover · drag"),
         "skills": ("Throw the spheres · tap one for details", "Grab and throw · click for details"),
@@ -202,28 +180,7 @@ EN = {
     "nora_lead": "A web and software development studio for businesses in Costa Rica. Every project is custom-built, with <b>SEO</b> and an <b>admin panel</b> when it applies.",
     "promise_k": "My promise",
     "promise": "Your site <b>doesn't go live</b> until you're <b>completely satisfied.</b> Quality first.",
-    "from": "from", "min": "minimum", "typ": "typical", "month": "/mo",
-    "packs": [
-        ("NORA Base", "Landing page", "₡100.000", "from", ""),
-        ("NORA Presencia", "Corporate website", "₡350.000", "from", ""),
-        ("NORA Tienda", "Online store (e-commerce)", "₡500.000", "min", "typical ₡700.000"),
-        ("NORA a Medida", "Custom software and web apps", "₡600.000", "from", ""),
-    ],
-    "pack_msg": "Hi David, I saw your portfolio and I'm interested in {p}. Could you tell me more?",
-    "extras_k": "Also",
-    "extras": [
-        ("Maintenance", "₡25.000/mo", "Domain and hosting not included"),
-        ("Meta Ads management", "₡45.000 – 70.000/mo", "Plus the client's ad spend"),
-    ],
-    "social_k": "Content and social media · monthly",
-    "social": [
-        ("Esencial", "₡95.000", "8 posts · 2 videos"),
-        ("Crecimiento", "₡165.000", "10 posts · 3 videos"),
-        ("Estudio Completo", "₡260.000", "12 posts · 4 videos · Meta Ads management"),
-    ],
-    "case_k": "In progress",
-    "case": "An online store for a local dog food business: SEO, admin panel and a complete shop.",
-    "nora_cta": "Get a quote on WhatsApp",
+    "nora_cta": "Message on WhatsApp",
     "nora_msg": "Hi David, I saw your portfolio and I'd like a quote for a project with NoraStudio.",
     "nora_site": "Visit norastudio.digital",
 
@@ -302,22 +259,11 @@ def card(L, c, i):
     return (f'<article class="card" data-hover><div class="card-in">{art}<div class="holo" aria-hidden="true"></div><div class="glare" aria-hidden="true"></div>'
             f'<div class="card-txt"><span class="mono">{e(kick)}</span><h3>{e(title)}</h3><p>{desc}</p><p class="tags mono">{e(tags)}</p>{more}</div></div></article>')
 
-def precio(L, p, kind):
-    if not MOSTRAR_PRECIOS: return ""
-    return f'<span class="price"><small>{L[kind]}</small>{e(p)}</span>'
-
 def page(L):
     other = EN if L is ES else ES
     lang = L["lang"]
     url = SITE + L["path"]
 
-    packs = "".join(
-        f'<li><a class="pack" href="{e(wa(L["pack_msg"].format(p=n)))}" target="_blank" rel="noopener" data-hover>'
-        f'<span class="pack-n"><b>{e(n)}</b><span>{e(d)}</span>{f"<small>{e(note)}</small>" if note and MOSTRAR_PRECIOS else ""}</span>'
-        f'{precio(L, p, kind)}<span class="pack-go" aria-hidden="true">↗</span></a></li>'
-        for n, d, p, kind, note in L["packs"])
-    extras = "".join(f'<li><b>{e(n)}</b>{f"<span class=price-s>{e(p)}</span>" if MOSTRAR_PRECIOS else ""}<small>{e(s)}</small></li>' for n, p, s in L["extras"])
-    social = "".join(f'<li><b>{e(n)}</b>{f"<span class=price-s>{e(p)}</span>" if MOSTRAR_PRECIOS else ""}<small>{e(s)}</small></li>' for n, p, s in L["social"])
     edu = "".join(f'<li><span class="mono">{e(y)}</span><b>{e(t)}</b>{f"<small>{e(s)}</small>" if s else ""}</li>' for y, t, s in L["edu"])
     stats = "".join(
         (f'<div><b class="txt">{e(n)}</b>' if kind == "text" else f'<div><b data-to="{n}">{n}</b>') + f'<span class="mono">{e(lbl)}</span></div>'
@@ -347,16 +293,12 @@ def page(L):
         "founder": None,
     }
     person.pop("founder")
-    offers = [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "description": d},
-               **({"priceSpecification": {"@type": "PriceSpecification", "minPrice": int(p.replace("₡", "").replace(".", "")), "priceCurrency": "CRC"}} if MOSTRAR_PRECIOS else {})}
-              for n, d, p, _, _ in L["packs"]]
     nora = {
         "@type": "ProfessionalService", "@id": NORA + "/#org", "name": "NoraStudio", "url": NORA,
         "telephone": "+" + WA_NUM, "founder": {"@id": SITE + "/#david"},
         "areaServed": {"@type": "Country", "name": "Costa Rica"},
         "address": {"@type": "PostalAddress", "addressLocality": "San José", "addressCountry": "CR"},
-        "description": L["nora_lead"].replace("<b>", "").replace("</b>", ""),
-        "hasOfferCatalog": {"@type": "OfferCatalog", "name": "NoraStudio", "itemListElement": offers},
+        "description": L["nora_lead"].replace("<b>", "").replace("</b>", "")
     }
     site = {"@type": "WebSite", "@id": SITE + "/#web", "url": SITE + "/", "name": "David Ureña", "inLanguage": ["es", "en"], "author": {"@id": SITE + "/#david"}}
     pageld = {"@type": "ProfilePage", "@id": url + "#page", "url": url, "name": L["title"], "inLanguage": lang, "isPartOf": {"@id": SITE + "/#web"}, "mainEntity": {"@id": SITE + "/#david"}}
@@ -458,12 +400,6 @@ def page(L):
       <p class="lead">{L["nora_lead"]}</p>
     </div>
     <p class="promise"><span class="mono">{e(L["promise_k"])}</span>{L["promise"]}</p>
-    <ul class="packs">{packs}</ul>
-    <div class="nora-more">
-      <div><p class="mono mini-k">{e(L["extras_k"])}</p><ul class="mini">{extras}</ul></div>
-      <div><p class="mono mini-k">{e(L["social_k"])}</p><ul class="mini">{social}</ul></div>
-    </div>
-    <p class="case"><span class="mono">{e(L["case_k"])}</span>{e(L["case"])}</p>
     <div class="ctas">
       {ext(L, e(wa(L["nora_msg"])), e(L["nora_cta"]), "pill solid")}
       {ext(L, NORA, e(L["nora_site"]))}
