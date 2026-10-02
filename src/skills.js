@@ -1,33 +1,28 @@
 // ============================================================
-//  skills.js — habilidades como esferas con física.
+//  skills.js — categorías de habilidades como esferas con física.
+//  Tocar una esfera (sin arrastrar) muestra su lista debajo.
 //  Se agarran, se lanzan, chocan entre sí. En el celular la gravedad
 //  sigue la inclinación del teléfono; en compu cae hacia abajo.
 // ============================================================
 
-const SK = [
-  { n: 'Lorem', v: 96, k: 'solid' }, { n: 'Ipsum', v: 90, k: 'acc' },
-  { n: 'Dolor', v: 84, k: 'ring' }, { n: 'Sit amet', v: 78, k: 'solid' },
-  { n: 'Elit', v: 72, k: 'ring' }, { n: 'Sed do', v: 88, k: 'cyan' },
-  { n: 'Tempor', v: 66, k: 'ring' }, { n: 'Magna', v: 80, k: 'solid' },
-  { n: 'Aliqua', v: 70, k: 'acc' },
-];
+const KINDS = ['solid', 'acc', 'ring', 'cyan', 'ring', 'solid', 'ring', 'acc'];
 
-export function initSkills(canvas, { tilt, haptic, mobile }) {
+export function initSkills(canvas, { tilt, haptic, mobile, balls: SK, onPick }) {
   const ctx = canvas.getContext('2d');
-  let W = 0, H = 0, dpr = 1, balls = [], visible = false, grab = null, lastBump = 0;
+  let W = 0, H = 0, dpr = 1, balls = [], visible = false, grab = null, lastBump = 0, sel = 0;
 
   function size() {
     dpr = Math.min(devicePixelRatio, 2);
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = W * dpr; canvas.height = H * dpr;
-    const base = Math.min(W, H) * (mobile ? .135 : .1);
+    const base = Math.min(W * (mobile ? .135 : .075), H * .2);
     if (!balls.length) {
       balls = SK.map((s, i) => ({
-        ...s, r: base * (.62 + s.v / 100 * .55),
+        ...s, i, k: KINDS[i % KINDS.length], r: base * (.75 + Math.min(s.c, 10) / 10 * .45),
         x: W * (.2 + .6 * Math.random()), y: -i * base * 1.2 - 40,
         vx: (Math.random() - .5) * 4, vy: 0, rot: 0,
       }));
-    } else balls.forEach((b) => { b.r = base * (.62 + b.v / 100 * .55); b.x = Math.min(b.x, W - b.r); });
+    } else balls.forEach((b) => { b.r = base * (.75 + Math.min(b.c, 10) / 10 * .45); b.x = Math.min(b.x, W - b.r); });
   }
 
   function hit(x, y) {
@@ -43,7 +38,7 @@ export function initSkills(canvas, { tilt, haptic, mobile }) {
     const [x, y] = local(cx, cy);
     const b = hit(x, y);
     if (!b) return false;
-    grab = { b, ox: x - b.x, oy: y - b.y, px: x, py: y, vx: 0, vy: 0 };
+    grab = { b, ox: x - b.x, oy: y - b.y, px: x, py: y, vx: 0, vy: 0, x0: x, y0: y, moved: false };
     balls.splice(balls.indexOf(b), 1); balls.push(b); // al frente
     haptic();
     return true;
@@ -52,12 +47,14 @@ export function initSkills(canvas, { tilt, haptic, mobile }) {
     if (!grab) return;
     const [x, y] = local(cx, cy);
     grab.vx = x - grab.px; grab.vy = y - grab.py;
+    if (Math.hypot(x - grab.x0, y - grab.y0) > 8) grab.moved = true;
     grab.px = x; grab.py = y;
     grab.b.x = x - grab.ox; grab.b.y = y - grab.oy;
   }
   function up() {
     if (!grab) return;
     grab.b.vx = grab.vx * 1.1; grab.b.vy = grab.vy * 1.1;
+    if (!grab.moved) { onPick?.(grab.b.i); grab.b.vy -= 9; }
     grab = null;
   }
 
@@ -118,6 +115,8 @@ export function initSkills(canvas, { tilt, haptic, mobile }) {
       ctx.translate(b.x, b.y);
       ctx.beginPath(); ctx.arc(0, 0, b.r, 0, Math.PI * 2);
       let fg;
+      const on = b.i === sel;
+      if (on) { ctx.save(); ctx.shadowColor = COL.acc; ctx.shadowBlur = 30; ctx.lineWidth = 3; ctx.strokeStyle = COL.acc; ctx.beginPath(); ctx.arc(0, 0, b.r + 5, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); ctx.beginPath(); ctx.arc(0, 0, b.r, 0, Math.PI * 2); }
       if (b.k === 'ring') { ctx.lineWidth = 1.5; ctx.strokeStyle = COL.bone; ctx.fillStyle = 'rgba(7,7,11,.55)'; ctx.fill(); ctx.stroke(); fg = COL.bone; }
       else { ctx.fillStyle = b.k === 'acc' ? COL.acc : b.k === 'cyan' ? COL.cyan : COL.bone; ctx.fill(); fg = COL.ink; }
       // brillo esférico
@@ -132,13 +131,15 @@ export function initSkills(canvas, { tilt, haptic, mobile }) {
       if (tw > b.r * 1.5) { fs *= (b.r * 1.5) / tw; ctx.font = `800 ${fs}px Syne, sans-serif`; }
       ctx.fillText(b.n.toUpperCase(), 0, -b.r * .08);
       ctx.font = `500 ${Math.round(b.r * .2)}px "JetBrains Mono", monospace`;
-      ctx.fillText(b.v + '%', 0, b.r * .3);
+      ctx.fillText(String(b.c).padStart(2, '0'), 0, b.r * .3);
       ctx.restore();
     }
   }
 
   return {
     tick() { if (!visible) return; physics(); draw(); },
+    select(i) { sel = i; },
+    poke(i) { const b = balls.find((x) => x.i === i); if (b) { b.vy -= 14; b.vx += (Math.random() - .5) * 8; } },
     kick() { balls.forEach((b) => { b.vx += (Math.random() - .5) * 30; b.vy -= 10 + Math.random() * 18; }); },
   };
 }

@@ -1,0 +1,15 @@
+{
+  "name": "portafolio-david",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 tools/build.py && rm -rf public/js && esbuild src/main.js --bundle --splitting --minify --format=esm --target=es2020 --outdir=public/js --chunk-names=[name]-[hash]"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "three": "^0.165.0"
+  }
+}

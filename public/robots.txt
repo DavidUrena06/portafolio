@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://david.norastudio.digital/sitemap.xml

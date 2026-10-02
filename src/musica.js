@@ -5,15 +5,13 @@
 //  level() da la energía del sonido para que las partículas respiren.
 // ============================================================
 
-const SRC = 'assets/cancion.mp3?v=1';
+const SRC = '/assets/cancion.mp3?v=1';
 const mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
 const CHORDS = [[57, 60, 64, 71], [53, 57, 60, 67], [48, 55, 64, 67], [55, 59, 62, 69]];
 
 export class Musica {
   constructor() {
     this.on = false;
-    this.archivo = null;
-    this.hayArchivo = fetch(SRC, { method: 'HEAD' }).then((r) => (this.archivo = r.ok)).catch(() => (this.archivo = false));
     this.data = null;
   }
 
@@ -30,14 +28,14 @@ export class Musica {
     C.resume();
 
     // la canción tiene que arrancar dentro del mismo toque (si no, iPhone la bloquea)
-    if (this.archivo !== false) {
+    {
       this.el = new Audio(SRC);
       this.el.loop = true;
       this.el.preload = 'auto';
       C.createMediaElementSource(this.el).connect(this.out);
       this.el.play().catch(() => {});
       this.el.addEventListener('error', () => this.ambiente(), { once: true });
-    } else this.ambiente();
+    }
     this.on = true;
     this.out.gain.setTargetAtTime(.8, C.currentTime, 1.2);
   }
