@@ -3,3 +3,5 @@
 public/assets/cancion.mp3
 node_modules/
 _sitio/
+__pycache__/
+*.pyc
