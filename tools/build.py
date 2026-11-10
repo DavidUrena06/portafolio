@@ -24,7 +24,7 @@ GITHUB = "https://github.com/DavidUrena06"
 INSTAGRAM = "https://www.instagram.com/urenas.js"
 NORA = "https://norastudio.digital"
 CV_ES = None                                   # "/David_Urena_CV_ES.pdf" cuando exista
-VERSION = "5"                                  # súbelo para romper caché de css/js
+VERSION = "7"                                  # súbelo para romper caché de css/js
 
 def wa(msg):
     return f"https://wa.me/{WA_NUM}?text={quote(msg)}"

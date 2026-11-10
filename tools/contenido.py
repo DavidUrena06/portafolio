@@ -52,7 +52,7 @@ ES = {
     "cv_nav": "CV",
 
     # hero
-    "hero_k": "Desarrollador full-stack · San José, Costa Rica",
+    "hero_k": "San José, Costa Rica",
     "h1": "David Ureña · Desarrollador full-stack",
     "hero_sub": "Desarrollador full-stack",
     "hero_tag": "Construyo aplicaciones web de punta a punta: <em>APIs, bases de datos y despliegue.</em> Para tu equipo o para tu negocio.",
@@ -267,7 +267,7 @@ EN = {
     "other_lang": ("ES", "/", "Español"),
     "cv_nav": "CV",
 
-    "hero_k": "Full-stack developer · San José, Costa Rica",
+    "hero_k": "San José, Costa Rica",
     "h1": "David Ureña · Full-stack developer",
     "hero_sub": "Full-stack developer",
     "hero_tag": "I build web applications end to end: <em>APIs, databases and deployment.</em> For your team or for your business.",

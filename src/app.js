@@ -152,7 +152,7 @@ function sample(cw, ch, draw, minA = 120) {
   return out;
 }
 
-function buildText(name, lines, dim = 1) {
+function buildText(name, lines, dim = 1, up = null, k = 1) {
   const { w, h } = view();
   const cw = 1000;
   const m = document.createElement('canvas').getContext('2d');
@@ -164,8 +164,8 @@ function buildText(name, lines, dim = 1) {
     x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
     lines.forEach((l, i) => x.fillText(l, cw / 2, ch / 2 + (i - (lines.length - 1) / 2) * fs * .9));
   });
-  const W = Math.min(mobile ? w * .9 : w * .82, 13.5, (lines.length > 1 ? h * .5 : h * .9) * cw / ch);
-  const cy = mobile ? h * .06 : h * .04;
+  const W = k * Math.min(mobile ? w * .9 : w * .82, 13.5, (lines.length > 1 ? h * .5 : h * .9) * cw / ch);
+  const cy = up ?? (mobile ? h * .06 : h * .04);
   const count = Math.floor(N * .8);
   for (let i = 0; i < count; i++) {
     const c = cands[(Math.random() * cands.length) | 0];
@@ -301,7 +301,7 @@ function buildWave() {
 }
 
 const BUILD = {
-  text: () => buildText('text', mobile ? CFG.hero : CFG.heroDesk),
+  text: () => buildText('text', mobile ? CFG.hero : CFG.heroDesk, 1, view().h * (mobile ? .27 : .12), mobile ? .78 : 1),
   nora: () => buildText('nora', CFG.nora, .3),
   portrait: buildPortrait, galaxy: buildGalaxy, planet: buildPlanet, rain: buildRain, hole: buildHole, wave: buildWave,
 };
@@ -676,7 +676,8 @@ const gateBtns = [enterBtn, muteBtn, skipBtn];
 gateBtns.forEach((b) => { b.classList.remove('loading'); b.removeAttribute('aria-busy'); });
 const topEl = $('#top'), mainEl = $('#main');
 topEl.inert = true; mainEl.inert = true;
-enterBtn.focus({ preventScroll: true });
+$('#gate').tabIndex = -1;
+$('#gate').focus({ preventScroll: true });
 
 function sndUI(on) {
   snd.classList.toggle('off', !on);
@@ -711,7 +712,6 @@ function enter(sound, instant) {
     checkSection();
     gsap.to($$(REVEAL, secs[0]), { opacity: 1, y: 0, duration: fast ? 0 : 1.4, ease: 'expo.out', stagger: fast ? 0 : .1, delay: fast ? 0 : .6 });
     secs[0].dataset.shown = 1;
-    document.getElementById('skip-main')?.remove();
   };
   if (fast) { $('#gate').remove(); finish(); }
   else {
