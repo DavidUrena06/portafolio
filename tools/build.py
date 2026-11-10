@@ -24,7 +24,7 @@ GITHUB = "https://github.com/DavidUrena06"
 INSTAGRAM = "https://www.instagram.com/urenas.js"
 NORA = "https://norastudio.digital"
 CV_ES = None                                   # "/David_Urena_CV_ES.pdf" cuando exista
-VERSION = "12"                                  # súbelo para romper caché de css/js
+VERSION = "15"                                  # súbelo para romper caché de css/js
 
 def wa(msg):
     return f"https://wa.me/{WA_NUM}?text={quote(msg)}"
@@ -52,14 +52,15 @@ def cv_href(L):
         return CV_ES
     return L["cv_file"]
 
+def picture(img, alt, sizes, big=False, lazy=True):
+    w = ["480", "720", "1080"]
+    ss = ", ".join(f"/assets/img/{img}-{x}.webp {x}w" for x in w)
+    return (f'<img src="/assets/img/{img}-{"1080" if big else "720"}.webp" srcset="{ss}" sizes="{sizes}" width="1080" height="810" '
+            f'{"loading=\"lazy\" " if lazy else ""}decoding="async" alt="{e(alt)}">')
+
 def card(L, slug, i):
     p, m = L["proj"][slug], PROJ_META[slug]
-    if m["img"]:
-        img = m["img"]
-        art = (f'<img class="art" src="/assets/img/{img}-720.webp" srcset="/assets/img/{img}-480.webp 480w, /assets/img/{img}-720.webp 720w, /assets/img/{img}-1080.webp 1080w" '
-               f'sizes="(min-width: 900px) 340px, 78vw" width="1080" height="810" loading="lazy" decoding="async" alt="{e(p["alt"])}">')
-    else:
-        art = f'<div class="art a{i % 5 + 1}" aria-hidden="true"></div>'
+    art = picture(m["shots"][0], p["alts"][0], "(min-width: 900px) 360px, 80vw").replace("<img ", '<img class="art" ', 1)
     demo = ext(L, m["demo"], e(L["lbl"]["demo"]), "card-link") if m["demo"] else ""
     return (f'<article class="card" data-hover><div class="card-in">{art}<div class="holo" aria-hidden="true"></div><div class="glare" aria-hidden="true"></div>'
             f'<div class="card-txt"><span class="mono">{i + 1:02d} · {e(p["kick"])}</span><h3>{e(p["title"])}</h3><p>{p["card"]}</p>'
@@ -168,7 +169,7 @@ def page(L):
     order = ["work", "exp", "nora", "about", "skills", "contact"]
     nav = "".join(f'<a href="#{k}" data-hover>{e(L["names"][k])}</a>' for k in order)
     cv_note = ""
-    if lang == "es" and not CV_ES:
+    if L["cv_todo"]:
         cv_note = f'<p class="hero-todo">{todo(L["cv_todo"])}</p>'
     cv_label = e(L["btn_cv"]) + (f' <small>{e(L["cv_lang_note"])}</small>' if (L["cv_lang_note"] and not (lang == "es" and CV_ES)) else "")
 
@@ -234,7 +235,6 @@ def page(L):
       <p class="lead">{e(L["work_lead"])}</p>
     </div>
     <div class="cards" tabindex="0" role="region" aria-label="{e(L["names"]["work"])}">{work_cards}</div>
-    <div class="ctas">{ext(L, GITHUB, e(L["gh_all"]))}</div>
   </section>
 
   <section {sec_attrs(L, "exp", "wave")}>
@@ -341,19 +341,13 @@ def project_page(L, slug, idx):
     stack = "".join(f"<li>{e(s)}</li>" for s in m["stack"])
     result = "<ul>" + "".join(f"<li>{e(x)}</li>" for x in p["result"]) + "</ul>"
 
-    if m["img"]:
-        img = m["img"]
-        shots = (f'<figure class="shot"><img src="/assets/img/{img}-1080.webp" srcset="/assets/img/{img}-720.webp 720w, /assets/img/{img}-1080.webp 1080w" '
-                 f'sizes="(min-width: 900px) 760px, 92vw" width="1080" height="810" loading="lazy" decoding="async" alt="{e(p["alt"])}"></figure>')
-    else:
-        shots = f'<p>{todo(L["todo_shot"])}</p>'
+    shots = '<div class="shots">' + "".join(
+        f'<figure class="shot">{picture(img, p["alts"][k], "(min-width: 900px) 760px, 92vw", big=True, lazy=k > 0)}</figure>'
+        for k, img in enumerate(m["shots"])) + "</div>"
 
     links = []
     if m["demo"]: links.append(ext(L, m["demo"], e(lb["demo"]), "pill solid"))
-    else: links.append(f'<p>{todo(L["todo_demo"])}</p>')
-    if m["repo"]: links.append(ext(L, m["repo"], e(lb["repo"])))
-    elif m.get("repo_private"): links.append(f'<p class="note">{e(lb["private"])}</p>')
-    else: links.append(f'<p>{todo(L["todo_repo"])}</p>')
+    if m.get("repo_private"): links.append(f'<p class="note">{e(lb["private"])}</p>')
 
     nxt = SLUGS[(idx + 1) % len(SLUGS)]
     ol, _, oname = L["other_lang"]
@@ -377,7 +371,7 @@ def project_page(L, slug, idx):
   <p class="mono kicker">{idx + 1:02d} · {e(p["kick"])}</p>
   <h1 class="doc-h">{e(p["title"])}</h1>
   <p class="lead">{p["short"]}</p>
-  <div class="ctas">{"".join(links)}</div>
+  {"<div class=\"ctas\">" + "".join(links) + "</div>" if links else ""}
 
   <section class="blk"><h2>{e(lb["problem"])}</h2>{problem}</section>
   <section class="blk"><h2>{e(lb["role"])}</h2>{role}</section>

@@ -492,3 +492,8 @@ html { scroll-behavior: smooth; }
 .gate-k { line-height: 1.5; min-height: 3em; }
 .gate-title { min-height: 2.05em; display: flex; align-items: flex-end; justify-content: center; }
 .gate-h { min-height: 6.4em; }
+
+/* capturas en las páginas de detalle */
+.shots { display: grid; gap: 16px; }
+@media (min-width: 700px) { .shots { grid-template-columns: 1fr 1fr; } .shots:has(.shot:only-child) { grid-template-columns: 1fr; } }
+.holo { opacity: .24; }
