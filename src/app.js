@@ -342,7 +342,7 @@ let holdTimer = 0;
 function pDown(sx, sy, target) {
   P.down = true; P.moved = false; P.t0 = performance.now(); P.active = true;
   P.sx = sx; P.sy = sy;
-  P.ignore = !!target.closest('#top, .phys, .cards, .sk-tabs, #gate');
+  P.ignore = !!target.closest('#top, .phys, .cards, .sk-tabs, #gate, a, button:not(#hold)');
   glow.classList.add('on');
   clearTimeout(holdTimer);
   if (!P.ignore) holdTimer = setTimeout(() => { if (P.down && !P.moved) { P.well = 1; glow.classList.add('well'); haptic(20); } }, 380);
@@ -395,12 +395,15 @@ function onMotion(e) {
 const secs = $$('.sec');
 let curSec = -1, entered = false;
 const dots = $('#dots');
-secs.forEach((s, i) => {
-  const b = document.createElement('button');
-  b.setAttribute('aria-label', s.dataset.name);
-  b.addEventListener('click', () => s.scrollIntoView({ behavior: 'smooth' }));
-  dots.append(b);
-});
+const navLinks = $$('a', dots);
+function markNav(id) {
+  navLinks.forEach((a) => {
+    const on = a.getAttribute('href') === '#' + id;
+    a.classList.toggle('on', on);
+    if (on) { a.setAttribute('aria-current', 'true'); if (dots.scrollWidth > dots.clientWidth) dots.scrollTo({ left: a.offsetLeft - (dots.clientWidth - a.offsetWidth) / 2, behavior: calm ? 'auto' : 'smooth' }); }
+    else a.removeAttribute('aria-current');
+  });
+}
 const toast = $('#toast');
 let toastT = 0;
 function hint(txt) {
@@ -412,7 +415,7 @@ function hint(txt) {
 const seenHint = new Set();
 
 // aparición del contenido
-const REVEAL = '.kicker, .big, .lead, .faith, .edu, .stats, .hero-tag, .scroll-cue, .promise, .packs > li, .nora-more, .case, .ctas, .cards, .exp, .phys, .sk-tabs, .sk-panel, .rain, .steps, .hole-wrap, .links, .place, .firma';
+const REVEAL = '.kicker, .big, .about-photo, .lead, .faith, .edu, .stats, .hero-sub, .hero-tag, .hero-btns, .hero-todo, .tl-i, .mini-k, .what li, .promise, .ctas, .cards, .phys, .sk-tabs, .sk-panel, .rain, .steps, .hole-wrap, .links, .place, .firma';
 if (!calm) secs.forEach((s) => gsap.set($$(REVEAL, s), { opacity: 0, y: 50 }));
 const io = new IntersectionObserver((ens) => ens.forEach((en) => {
   if (!en.isIntersecting || en.target.dataset.shown || (!entered && en.target === secs[0])) return;
@@ -430,7 +433,7 @@ function checkSection() {
       if (i !== curSec) {
         curSec = i;
         setShape(secs[i].dataset.shape);
-        $$('button', dots).forEach((b, j) => b.classList.toggle('on', j === i));
+        markNav(secs[i].id);
         if (!seenHint.has(i)) { seenHint.add(i); hint(secs[i].dataset[mobile ? 'hintTouch' : 'hintDesk']); }
         haptic(8);
       }
@@ -511,8 +514,6 @@ function tickHold(dt) {
     explode(.7);
     if (navigator.vibrate) navigator.vibrate([30, 40, 60]);
     holdTxt.textContent = CFG.holdDone;
-    $('#links').classList.add('on');
-    gsap.fromTo('#links .pill', { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: .08, duration: 1, ease: 'expo.out' });
   }
 }
 
@@ -670,12 +671,26 @@ document.fonts.load('800 100px Syne').finally(() => {
   requestAnimationFrame(frame);
 });
 
-$('#enter').classList.remove('loading');
-$('#enter').removeAttribute('aria-busy');
-$('#enter').addEventListener('click', () => {
-  if (entered) return;
+const enterBtn = $('#enter'), muteBtn = $('#enter-mute'), skipBtn = $('#skip-intro'), snd = $('#snd');
+const gateBtns = [enterBtn, muteBtn, skipBtn];
+gateBtns.forEach((b) => { b.classList.remove('loading'); b.removeAttribute('aria-busy'); });
+const topEl = $('#top'), mainEl = $('#main');
+topEl.inert = true; mainEl.inert = true;
+enterBtn.focus({ preventScroll: true });
+
+function sndUI(on) {
+  snd.classList.toggle('off', !on);
+  snd.setAttribute('aria-pressed', on ? 'true' : 'false');
+}
+
+// sound: la música solo arranca si la persona elige «con sonido» o enciende el botón
+// instant: «Saltar» omite la animación de la intro
+let entering = false;
+function enter(sound, instant) {
+  if (entered || entering) return;
+  entering = true;
   haptic(20);
-  musica.start();
+  if (sound) { musica.start(); sndUI(true); }
   // permisos de movimiento (iPhone los pide; Android no)
   if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission().then((r) => { if (r === 'granted') addEventListener('deviceorientation', onOri); }).catch(() => {});
@@ -684,23 +699,33 @@ $('#enter').addEventListener('click', () => {
     DeviceMotionEvent.requestPermission().then((r) => { if (r === 'granted') addEventListener('devicemotion', onMotion); }).catch(() => {});
   } else addEventListener('devicemotion', onMotion);
 
-  const r = $('#enter').getBoundingClientRect();
-  wave(r.left + r.width / 2, r.top + r.height / 2, 1.2);
-  gsap.to('#gate', { opacity: 0, scale: 1.15, duration: .9, ease: 'expo.in', onComplete: () => $('#gate').remove() });
-  setTimeout(() => {
+  const fast = instant || calm;
+  const r = enterBtn.getBoundingClientRect();
+  if (!fast) wave(r.left + r.width / 2, r.top + r.height / 2, 1.2);
+  const finish = () => {
     entered = true;
+    topEl.inert = false; mainEl.inert = false;
     document.body.classList.remove('locked');
     document.body.classList.add('in');
-    gsap.to('#top', { opacity: 1, duration: 1 });
+    gsap.to('#top', { opacity: 1, duration: fast ? 0 : 1 });
     checkSection();
-    gsap.to($$(REVEAL, secs[0]), { opacity: 1, y: 0, duration: 1.4, ease: 'expo.out', stagger: .1, delay: .6 });
+    gsap.to($$(REVEAL, secs[0]), { opacity: 1, y: 0, duration: fast ? 0 : 1.4, ease: 'expo.out', stagger: fast ? 0 : .1, delay: fast ? 0 : .6 });
     secs[0].dataset.shown = 1;
-  }, 650);
-});
+    document.getElementById('skip-main')?.remove();
+  };
+  if (fast) { $('#gate').remove(); finish(); }
+  else {
+    gsap.to('#gate', { opacity: 0, scale: 1.15, duration: .9, ease: 'expo.in', onComplete: () => $('#gate').remove() });
+    setTimeout(finish, 650);
+  }
+}
+enterBtn.addEventListener('click', () => enter(true, false));
+muteBtn.addEventListener('click', () => enter(false, false));
+skipBtn.addEventListener('click', () => enter(false, true));
+addEventListener('keydown', (e) => { if (e.key === 'Escape' && !entered) enter(false, true); });
 
-$('#snd').addEventListener('click', (e) => {
-  const on = musica.toggle();
-  e.currentTarget.classList.toggle('off', !on);
-  e.currentTarget.setAttribute('aria-pressed', on ? 'true' : 'false');
+snd.addEventListener('click', () => {
+  if (!musica.ctx) { musica.start(); sndUI(true); }   // primera vez: dentro del toque
+  else sndUI(musica.toggle());
   haptic();
 });
