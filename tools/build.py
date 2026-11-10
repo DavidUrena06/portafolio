@@ -24,7 +24,7 @@ GITHUB = "https://github.com/DavidUrena06"
 INSTAGRAM = "https://www.instagram.com/urenas.js"
 NORA = "https://norastudio.digital"
 CV_ES = None                                   # "/David_Urena_CV_ES.pdf" cuando exista
-VERSION = "15"                                  # súbelo para romper caché de css/js
+VERSION = "16"                                  # súbelo para romper caché de css/js
 
 def wa(msg):
     return f"https://wa.me/{WA_NUM}?text={quote(msg)}"
@@ -171,7 +171,7 @@ def page(L):
     cv_note = ""
     if L["cv_todo"]:
         cv_note = f'<p class="hero-todo">{todo(L["cv_todo"])}</p>'
-    cv_label = e(L["btn_cv"]) + (f' <small>{e(L["cv_lang_note"])}</small>' if (L["cv_lang_note"] and not (lang == "es" and CV_ES)) else "")
+    cv_label = e(L["btn_view_cv"]) + (f' <small>{e(L["cv_lang_note"])}</small>' if (L["cv_lang_note"] and not (lang == "es" and CV_ES)) else "")
 
     head_html = head(L, L["title"], L["desc"], url, SITE + "/", SITE + "/en/",
                      ld=f'<script type="application/ld+json">{ld}</script>\n<noscript><style>#gate{{display:none}}body.locked{{overflow:auto!important;height:auto!important}}body:not(.in) #main,#top{{opacity:1!important}}</style></noscript>\n</head>')
@@ -202,7 +202,7 @@ def page(L):
   <a class="brand" href="#hero" aria-label="David Ureña">D<em>u</em></a>
   <nav class="dots" id="dots" aria-label="{e(L["nav"])}">{nav}</nav>
   <div class="top-r">
-    <a class="pill-s cv-link" href="{cv_href(L)}" download data-hover>{e(L["cv_nav"])} <span aria-hidden="true">↓</span><span class="sr"> {e(L["btn_cv"])}</span></a>
+    <a class="pill-s cv-link" href="{cv_href(L)}" target="_blank" rel="noopener" data-hover>{e(L["cv_nav"])} <span aria-hidden="true">↗</span><span class="sr"> {e(L["btn_view_cv"])} {L["new_tab"]}</span></a>
     <a class="lang mono" href="{ohref}" hreflang="{other["lang"]}" lang="{other["lang"]}" aria-label="{e(oname)}" data-hover>{ol}</a>
     <button id="snd" class="snd off" aria-label="{e(L["sound"])}" aria-pressed="false" data-hover><i></i><i></i><i></i><i></i></button>
   </div>
@@ -220,10 +220,11 @@ def page(L):
       <p class="hero-tag">{L["hero_tag"]}</p>
       <div class="hero-btns">
         <a href="#work" class="pill solid" data-hover>{e(L["btn_projects"])} <span aria-hidden="true">↓</span></a>
-        <a href="{cv_href(L)}" class="pill" download data-hover>{cv_label} <span aria-hidden="true">↓</span></a>
+        <a href="{cv_href(L)}" class="pill" target="_blank" rel="noopener" data-hover>{cv_label} <span aria-hidden="true">↗</span><span class="sr"> {L["new_tab"]}</span></a>
         {ext(L, e(wa(L["quote_msg"])), e(L["btn_quote"]))}
       </div>
       {cv_note}
+      <p class="hero-dl"><a href="{cv_href(L)}" download data-hover>{e(L["dl_cv"])} <span aria-hidden="true">↓</span></a></p>
       <div class="stats">{stats}</div>
     </div>
   </section>

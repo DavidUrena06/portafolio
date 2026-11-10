@@ -497,3 +497,6 @@ html { scroll-behavior: smooth; }
 .shots { display: grid; gap: 16px; }
 @media (min-width: 700px) { .shots { grid-template-columns: 1fr 1fr; } .shots:has(.shot:only-child) { grid-template-columns: 1fr; } }
 .holo { opacity: .24; }
+
+.hero-dl { margin: 14px 0 0; font-size: 15px; }
+.hero-dl a { color: var(--bone); text-decoration: underline; text-underline-offset: 4px; padding: 8px 0; display: inline-block; }
