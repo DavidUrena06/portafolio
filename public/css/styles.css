@@ -489,3 +489,6 @@ html { scroll-behavior: smooth; }
   .s-hero .stats { margin-top: 16px; padding-top: 12px; }
   .s-hero { gap: 0; justify-content: flex-end; }
 }
+.gate-k { line-height: 1.5; min-height: 3em; }
+.gate-title { min-height: 2.05em; display: flex; align-items: flex-end; justify-content: center; }
+.gate-h { min-height: 6.4em; }

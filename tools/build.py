@@ -24,7 +24,7 @@ GITHUB = "https://github.com/DavidUrena06"
 INSTAGRAM = "https://www.instagram.com/urenas.js"
 NORA = "https://norastudio.digital"
 CV_ES = None                                   # "/David_Urena_CV_ES.pdf" cuando exista
-VERSION = "7"                                  # súbelo para romper caché de css/js
+VERSION = "11"                                  # súbelo para romper caché de css/js
 
 def wa(msg):
     return f"https://wa.me/{WA_NUM}?text={quote(msg)}"
@@ -100,6 +100,7 @@ def head(L, title, desc, url, url_es, url_en, og="profile", ld=""):
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/syne-800-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/styles.css?v={VERSION}">
 {ld}"""
 
@@ -172,9 +173,9 @@ def page(L):
     cv_label = e(L["btn_cv"]) + (f' <small>{e(L["cv_lang_note"])}</small>' if (L["cv_lang_note"] and not (lang == "es" and CV_ES)) else "")
 
     head_html = head(L, L["title"], L["desc"], url, SITE + "/", SITE + "/en/",
-                     ld=f'<script type="application/ld+json">{ld}</script>\n<noscript><style>#gate{{display:none}}body:not(.in) #main,#top{{opacity:1!important}}</style></noscript>\n</head>')
+                     ld=f'<script type="application/ld+json">{ld}</script>\n<noscript><style>#gate{{display:none}}body.locked{{overflow:auto!important;height:auto!important}}body:not(.in) #main,#top{{opacity:1!important}}</style></noscript>\n</head>')
     return head_html + f'''
-<body>
+<body class="locked">
 <a class="skip" href="#main">{e(L["skip"])}</a>
 <canvas id="gl" aria-hidden="true"></canvas>
 <div id="glow" aria-hidden="true"></div>
