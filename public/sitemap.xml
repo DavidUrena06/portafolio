@@ -12,4 +12,64 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/"/>
   </url>
+  <url>
+    <loc>https://david.norastudio.digital/proyectos/ngn-web/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/ngn-web/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/ngn-web/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/ngn-web/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/en/projects/ngn-web/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/ngn-web/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/ngn-web/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/ngn-web/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/proyectos/virtualbet/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/virtualbet/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/virtualbet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/virtualbet/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/en/projects/virtualbet/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/virtualbet/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/virtualbet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/virtualbet/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/proyectos/nora-tienda/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/nora-tienda/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/nora-tienda/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/nora-tienda/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/en/projects/nora-tienda/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/nora-tienda/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/nora-tienda/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/nora-tienda/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/proyectos/coverage-designer/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/coverage-designer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/coverage-designer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/coverage-designer/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/en/projects/coverage-designer/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/coverage-designer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/coverage-designer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/coverage-designer/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/proyectos/laboratorio-trading/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/laboratorio-trading/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/laboratorio-trading/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/laboratorio-trading/"/>
+  </url>
+  <url>
+    <loc>https://david.norastudio.digital/en/projects/laboratorio-trading/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://david.norastudio.digital/proyectos/laboratorio-trading/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.norastudio.digital/en/projects/laboratorio-trading/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://david.norastudio.digital/proyectos/laboratorio-trading/"/>
+  </url>
 </urlset>
