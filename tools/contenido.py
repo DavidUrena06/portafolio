@@ -22,7 +22,7 @@ PROJ_META = {
     },
     "coverage-designer": {
         "img": "ngn-cobertura-wifi", "demo": "https://ngn.co.cr/cobertura-wifi/disenar", "repo": None,
-        "stack": ["Mapas de calor", "Cotizaciones", "Exportación a PDF"],
+        "stack": ["React", "TypeScript", "Vite", "Konva", "Node.js", "PostgreSQL"],
     },
     "laboratorio-trading": {
         "img": None, "demo": None, "repo": None,
@@ -112,8 +112,9 @@ ES = {
             "role": ["Lo diseñé y construí completo: backend, base de datos, interfaz y despliegue."],
             "result": [
                 "Aplicación desplegada y funcionando en la nube.",
-                "Sistema de moneda virtual y juegos: Crash, Mines, Blackjack, Keno, Plinko, CoinFlip y Dice.",
-                "Módulo de apuestas deportivas con datos de TheSportsDB, y funciones P2P y sociales.",
+                "API REST con autenticación JWT y bcrypt, y un libro de movimientos que guarda cada cambio de saldo como transacción.",
+                "Seis juegos que corren en el servidor, con RNG, ventaja de la casa y pagos: Crash, Mines, Blackjack, Keno, Plinko y CoinFlip.",
+                "Apuestas deportivas automatizadas: tareas programadas importan partidos y resultados de TheSportsDB, bloquean partidos al iniciar y vencen invitaciones P2P pendientes.",
                 "Es una demo con moneda virtual: no usa dinero real.",
             ],
         },
@@ -135,7 +136,7 @@ ES = {
             "problem": ["Apoyar el trabajo de ventas e instalación de NGN: simular y planificar la cobertura de WiFi y videovigilancia sobre el plano de cada lugar."],
             "problem_todo": "",
             "role": ["Diseñé y construí la aplicación web completa y la desplegué."],
-            "result": ["Aplicación en producción dentro de ngn.co.cr.", "Mapas de calor de cobertura, cotizaciones y exportación a PDF o imagen."],
+            "result": ["Aplicación en producción dentro de ngn.co.cr.", "Motor de simulación con modelo de pérdida por distancia y atenuación por material de pared; mapas de calor de WiFi y conos de visión de cámaras sobre planos.", "Vista de autocotización para el cliente separada de la vista técnica interna de NGN, con acceso por roles; costos y márgenes quedan solo en el backend.", "Cotizaciones automáticas y exportación a PDF o imagen."],
         },
         "laboratorio-trading": {
             "kick": "Investigación de datos · Python", "title": "Laboratorio de trading",
@@ -157,10 +158,10 @@ ES = {
     "exp_h": "Dónde <em>he trabajado.</em>",
     "exp": [
         {"dates": "Feb 2026 — Oct 2026", "role": "Desarrollador de software", "org": "NGN Costa Rica",
-         "note": "Empleado de NGN. Algunos trabajos también los hice desde NORA Studio.",
+         "note": "Empleado y contratista (a través de NORA Studio).",
          "items": [
-             "Plataforma de facturación electrónica con Node.js, Express, Prisma y PostgreSQL, integrada con Zoho Mail, con módulo de leads y registro de auditoría.",
-             "Sitio web corporativo en Astro con 100/100 en Google PageSpeed.",
+             "Comprobantes CR, plataforma interna de facturación electrónica (Node.js, Express, Prisma, PostgreSQL): lee los XML de Hacienda desde Zoho Mail, clasifica equipos por código CABYS y tiene módulo de leads y registro de auditoría.",
+             "Sitio web corporativo en Astro como sitio estático (100/100 en Google PageSpeed), en un VPS detrás de Cloudflare, con GTM, GA4 y Google Ads configurados.",
              "NGN Coverage Designer: aplicación web para simular y planificar cobertura WiFi y de cámaras.",
              "Campañas de Google Ads con GTM y GA4, y estrategia de contenido para su página de ~10.000 seguidores.",
              "Trabajo junto a los equipos de desarrollo, marketing digital y ventas B2B.",
@@ -326,8 +327,9 @@ EN = {
             "role": ["I designed and built all of it: backend, database, interface and deployment."],
             "result": [
                 "Application deployed and running in the cloud.",
-                "Virtual currency system and games: Crash, Mines, Blackjack, Keno, Plinko, CoinFlip and Dice.",
-                "Sports betting module powered by TheSportsDB, plus P2P and social features.",
+                "REST API with JWT and bcrypt authentication, and a ledger that stores every balance change as a transaction.",
+                "Six games that run server-side, with RNG, house edge and payouts: Crash, Mines, Blackjack, Keno, Plinko and CoinFlip.",
+                "Automated sportsbook: scheduled jobs import fixtures and results from TheSportsDB, lock matches when they start and expire pending P2P invitations.",
                 "It is a demo with virtual currency: no real money is used.",
             ],
         },
@@ -349,7 +351,7 @@ EN = {
             "problem": ["Support NGN's sales and installation work: simulate and plan WiFi and video-surveillance coverage over each site's floor plan."],
             "problem_todo": "",
             "role": ["I designed and built the whole web application and deployed it."],
-            "result": ["Application live inside ngn.co.cr.", "Coverage heat maps, quotes and PDF or image export."],
+            "result": ["Application live inside ngn.co.cr.", "Simulation engine with a log-distance path-loss model and per-material wall attenuation; WiFi heat maps and camera field-of-view cones over floor plans.", "A client self-quoting view separated from NGN's internal technical view, with role-based access; costs and margins stay on the backend only.", "Automatic quotes and PDF or image export."],
         },
         "laboratorio-trading": {
             "kick": "Data research · Python", "title": "Trading research lab",
@@ -370,10 +372,10 @@ EN = {
     "exp_h": "Where <em>I've worked.</em>",
     "exp": [
         {"dates": "Feb 2026 — Oct 2026", "role": "Software developer", "org": "NGN Costa Rica",
-         "note": "NGN employee. Some of the work was also done through NORA Studio.",
+         "note": "Employee and contractor (through NORA Studio).",
          "items": [
-             "Electronic invoicing platform with Node.js, Express, Prisma and PostgreSQL, integrated with Zoho Mail, with a leads module and audit log.",
-             "Corporate website in Astro scoring 100/100 on Google PageSpeed.",
+             "Comprobantes CR, an internal invoicing platform (Node.js, Express, Prisma, PostgreSQL): reads Hacienda XML invoices from Zoho Mail, classifies equipment by CABYS code, with a leads module and audit log.",
+             "Corporate website in Astro as a static site (100/100 on Google PageSpeed), on a VPS behind Cloudflare, with GTM, GA4 and Google Ads set up.",
              "NGN Coverage Designer: a web application to simulate and plan WiFi and camera coverage.",
              "Google Ads campaigns with GTM and GA4, and content strategy for their ~10,000-follower page.",
              "Worked alongside the development, digital marketing and B2B sales teams.",
